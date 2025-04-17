@@ -18,16 +18,29 @@ def view_books():
         for index, book in enumerate(library, start=1):
             print(f"{index}. {book['title']} - {book['author']}")
 
-# Function to delete a book from the library
+# Function to delete book from the library
 def delete_book():
     # Display the list with books
     view_books()
     try:
-        book_number = int(input("Enter the book number to delete: "))
+        book_number = int(input("Enter the book number for delete: "))
         if 1 <= book_number <= len(library):
             removed_book = library.pop(book_number - 1)
-            print(f"The book '{removed_book['title']}' has been deleted.")
+            print(f"The book '{removed_book['title']}' was deleted.")
         else:
             print("Invalid book number.")
     except ValueError:
-        print("Please enter a valid number.")
+        print("Please enter valid number.")
+
+# Function for searching books by title or author
+def search_book():
+    keyword = input("Enter name of book or author to search: ").lower()
+    # Create the dictionary with indexes and books for easier searching
+    library_dict = {index: book for index, book in enumerate(library, start=1)}
+    # Filter books that contain the keyword in the title or author name
+    results = {index: book for index, book in library_dict.items() 
+               if keyword in book['title'].lower() or keyword in book['author'].lower()}
+    if results:
+        print("Books found: ")
+    else:
+        print("No books found.")

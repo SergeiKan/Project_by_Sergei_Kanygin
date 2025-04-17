@@ -44,3 +44,21 @@ def search_book():
         print("Books found: ")
     else:
         print("No books found.")
+
+# Function to mark book as borrowed
+def borrow_book():
+    view_books()
+    try:
+        book_number = int(input("Enter the book number: "))
+        if 1 <= book_number <= len(library):
+            book = library[book_number - 1]
+            if book['user']:
+                print(f"The book is already borrowed by {book['user']}.")
+            else:
+                user = input("Enter your name: ")
+                book['user'] = user
+                print(f"The book '{book['title']}' has been successfully borrowed by {user}.")
+        else:
+            print("Invalid book number.")
+    except ValueError:
+        print("Please enter valid number.")

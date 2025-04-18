@@ -79,3 +79,37 @@ def return_book():
             print("Invalid book number.")
     except ValueError:
         print("Please enter valid number.")
+
+# Main menu
+def main():
+    while True:
+        print("\nMenu:")
+        print("1. Add the book in list")
+        print("2. View list of books")
+        print("3. Delete the book")
+        print("4. Search the book in library")
+        print("5. Borrow the book")
+        print("6. Return the book")
+        print("7. Exit")
+        choice = input("Choose an action (1-7): ")
+        if choice == "1":
+            add_book()
+        elif choice == "2":
+            view_books()
+        elif choice == "3":
+            delete_book()
+        elif choice == "4":
+            search_book()
+        elif choice == "5":
+            borrow_book()
+        elif choice == "6":
+            return_book()
+        elif choice == "7":
+            print("Exiting the program. Goodbye!")
+            break
+        else:
+            print("Invalid choice. Please try again.")
+
+# Run the code
+if __name__ == "__main__":
+    main()

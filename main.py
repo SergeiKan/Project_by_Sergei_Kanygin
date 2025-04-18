@@ -62,3 +62,20 @@ def borrow_book():
             print("Invalid book number.")
     except ValueError:
         print("Please enter valid number.")
+
+# Function for book returning
+def return_book():
+    view_books()
+    try:
+        book_number = int(input("Enter the book number wich you want to return: "))
+        if 1 <= book_number <= len(library):
+            book = library[book_number - 1]
+            if not book['user']:
+                print("This book in the library.")
+            else:
+                book['user'] = None
+                print(f"The book '{book['title']}' was successfully returned.")
+        else:
+            print("Invalid book number.")
+    except ValueError:
+        print("Please enter valid number.")

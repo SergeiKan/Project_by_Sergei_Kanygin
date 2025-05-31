@@ -46,40 +46,28 @@ class DigitalBook(Book):   # Subclass for digital books
     def evaluate_expression(self):
         return self.is_scientific
 
+class Library:   # Create list for book`s information in library
+    def __init__(self):
+        self.books = []
+        self.books_by_year = {}   # Books grouped by year
+        self.additional_info = {}
+        self.book_year_range = ()   # Year range tuple
 
-# Create list for book`s information in library
-library = []
+    def add_book(self, book):
+        self.books.append(book)
 
-# Add a new book in library
-def add_book():
-    title = input("Enter book title: ")
-    author = input("Enter an author: ")
-# Add the book to the list
-    library.append({"title": title, "author": author, "user": None})
-    print("The book was successfully added!")
-
-# Function to display all books in the library
-def view_books():
-    if not library:
-        print("The library is empty.")
-    else:
-        print("List of books: ")
-        for index, book in enumerate(library, start=1):
-            print(f"{index}. {book['title']} - {book['author']}")
-
-# Function to delete book from the library
-def delete_book():
-    # Display the list with books
-    view_books()
-    try:
-        book_number = int(input("Enter the book number for delete: "))
-        if 1 <= book_number <= len(library):
-            removed_book = library.pop(book_number - 1)
-            print(f"The book '{removed_book['title']}' was deleted.")
+    def view_books(self):
+        if not self.books:
+            print("The library is empty.")
         else:
-            print("Invalid book number.")
-    except ValueError:
-        print("Please enter valid number.")
+            print("Book list:")
+            for idx, book in enumerate(self.books, start=1):
+                status = "Available" if book.is_available() else f"Borrowed by {book.user}"
+                print(f"{idx}. {book.title} ({book.author}, {book.year}) - {status}")
+
+
+
+
 
 # Function for searching books by title or author
 def search_book():

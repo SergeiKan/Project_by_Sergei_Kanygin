@@ -1,3 +1,52 @@
+import pandas as pd
+import time
+from abc import ABC, abstractmethod
+
+class AbstractBook(ABC):   # Abstract class for book basical format
+    @abstractmethod
+    def evaluate_expression(self):
+        pass
+    @abstractmethod
+    def is_available(self):
+        pass
+
+class Book(AbstractBook):   # Base book class
+    def __init__(self, title, author, year, logic_expression, is_scientific, is_fiction):
+        self.title = title
+        self.author = author
+        self.year = year
+        self.logic_expression = logic_expression
+        self.is_scientific = is_scientific
+        self.is_fiction = is_fiction
+        self.user = None
+
+    def is_available(self):   # Check if book is available
+        return self.user is None
+
+    def evaluate_expression(self):
+        try:
+            expr = self.logic_expression.replace("and", "and").replace("or", "or").replace("not", "not")
+            return eval(expr, {}, {
+                "scientific": self.is_scientific,
+                "fiction": self.is_fiction
+            })
+        except Exception:
+            return False
+
+class PrintedBook(Book):   # Subclass for printed books
+    def __init__(self, title, author, year, logic_expression, is_scientific, is_fiction, pages):
+        super().__init__(title, author, year, logic_expression, is_scientific, is_fiction)
+        self.pages = pages
+
+class DigitalBook(Book):   # Subclass for digital books
+    def __init__(self, title, author, year, logic_expression, is_scientific, is_fiction, file_size_mb):
+        super().__init__(title, author, year, logic_expression, is_scientific, is_fiction)
+        self.file_size_mb = file_size_mb
+
+    def evaluate_expression(self):
+        return self.is_scientific
+
+
 # Create list for book`s information in library
 library = []
 

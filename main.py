@@ -65,22 +65,25 @@ class Library:   # Create list for book`s information in library
                 status = "Available" if book.is_available() else f"Borrowed by {book.user}"
                 print(f"{idx}. {book.title} ({book.author}, {book.year}) - {status}")
 
+    def delete_book(self, index):
+        if 0 <= index < len(self.books):
+            removed = self.books.pop(index)
+            print(f"Book '{removed.title}' deleted.")
+        else:
+            print("Invalid book number.")
+
+    def search_books(self, keyword):
+        return [book for book in self.books if keyword.lower() in book.title.lower() or keyword.lower() in book.author.lower()]
+
+    def search_books_by_logic(self, expected_value=True):  # Logic-based search
+        return [book for book in self.books if book.evaluate_expression() == expected_value]
 
 
 
 
-# Function for searching books by title or author
-def search_book():
-    keyword = input("Enter name of book or author to search: ").lower()
-    # Create the dictionary with indexes and books for easier searching
-    library_dict = {index: book for index, book in enumerate(library, start=1)}
-    # Filter books that contain the keyword in the title or author name
-    results = {index: book for index, book in library_dict.items() 
-               if keyword in book['title'].lower() or keyword in book['author'].lower()}
-    if results:
-        print("Books found: ")
-    else:
-        print("No books found.")
+
+
+
 
 # Function to mark book as borrowed
 def borrow_book():

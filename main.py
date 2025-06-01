@@ -78,47 +78,50 @@ class Library:   # Create list for book`s information in library
     def search_books_by_logic(self, expected_value=True):  # Logic-based search
         return [book for book in self.books if book.evaluate_expression() == expected_value]
 
+    def bubble_sort_books(self):  # Сортировка пузырьком / Bubble sort
+        start = time.time()
+        n = len(self.books)
+        for i in range(n):
+            for j in range(0, n - i - 1):
+                a = self.books[j]
+                b = self.books[j + 1]
+                if (a.year > b.year) or (a.year == b.year and not a.evaluate_expression() and b.evaluate_expression()):
+                    self.books[j], self.books[j + 1] = b, a
+        end = time.time()
+        print(f"Время сортировки пузырьком: {end - start:.6f} сек / Bubble sort time: {end - start:.6f} seconds")
 
+    def merge_sort_books(self):   # Merge sort
+        start = time.time()
+        self.books = self._merge_sort(self.books)
+        end = time.time()
+        print(f"Merge sort time: {end - start:.6f} seconds")
 
+    def _merge_sort(self, books):   # Recursive part
+        if len(books) <= 1:
+            return books
+        mid = len(books) // 2
+        left = self._merge_sort(books[:mid])
+        right = self._merge_sort(books[mid:])
+        return self._merge(left, right)
 
-
-
-
-
-# Function to mark book as borrowed
-def borrow_book():
-    view_books()
-    try:
-        book_number = int(input("Enter the book number: "))
-        if 1 <= book_number <= len(library):
-            book = library[book_number - 1]
-            if book['user']:
-                print(f"The book is already borrowed by {book['user']}.")
+    def _merge(self, left, right):  # Merge
+        result = []
+        while left and right:
+            a = left[0]
+            b = right[0]
+            if (a.author < b.author) or (a.author == b.author and a.evaluate_expression() and not b.evaluate_expression()):
+                result.append(left.pop(0))
             else:
-                user = input("Enter your name: ")
-                book['user'] = user
-                print(f"The book '{book['title']}' has been successfully borrowed by {user}.")
-        else:
-            print("Invalid book number.")
-    except ValueError:
-        print("Please enter valid number.")
+                result.append(right.pop(0))
+        result.extend(left or right)
+        return result
 
-# Function for book returning
-def return_book():
-    view_books()
-    try:
-        book_number = int(input("Enter the book number wich you want to return: "))
-        if 1 <= book_number <= len(library):
-            book = library[book_number - 1]
-            if not book['user']:
-                print("This book in the library.")
-            else:
-                book['user'] = None
-                print(f"The book '{book['title']}' was successfully returned.")
-        else:
-            print("Invalid book number.")
-    except ValueError:
-        print("Please enter valid number.")
+
+
+
+
+
+
 
 # Main menu
 def main():

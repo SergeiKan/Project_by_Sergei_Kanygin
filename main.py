@@ -133,7 +133,21 @@ class Library:   # Create list for book`s information in library
         except Exception as e:
             print(f"Error loading CSV file: {e}")
 
-
+    def save_to_csv(self, filename):
+        try:
+            data = [{
+                'title': b.title,
+                'author': b.author,
+                'year': b.year,
+                'expression': b.logic_expression,
+                'scientific': b.is_scientific,
+                'fiction': b.is_fiction
+            } for b in self.books]
+            df = pd.DataFrame(data)
+            df.to_csv(filename, index=False)
+            print(f"Data saved to '{filename}'.")
+        except Exception as e:
+            print(f"Error saving CSV file: {e}")
 
 
 

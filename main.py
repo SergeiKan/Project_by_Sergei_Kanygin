@@ -115,6 +115,23 @@ class Library:   # Create list for book`s information in library
                 result.append(right.pop(0))
         result.extend(left or right)
         return result
+        
+    def load_from_csv(self, filename):
+        try:
+            df = pd.read_csv(filename)
+            for _, row in df.iterrows():
+                book = Book(
+                    title=row['title'],
+                    author=row['author'],
+                    year=int(row['year']),
+                    logic_expression=row['expression'],
+                    is_scientific=bool(row['scientific']),
+                    is_fiction=bool(row['fiction'])
+                )
+                self.add_book(book)
+            print(f"File '{filename}' loaded successfully.")
+        except Exception as e:
+            print(f"Error loading CSV file: {e}")
 
 
 

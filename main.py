@@ -149,40 +149,29 @@ class Library:   # Create list for book`s information in library
         except Exception as e:
             print(f"Error saving CSV file: {e}")
 
+def main_menu():
+    library = Library()
 
-
-
-
-
-# Main menu
-def main():
     while True:
-        print("\nMenu:")
-        print("1. Add the book in list")
-        print("2. View list of books")
-        print("3. Delete the book")
-        print("4. Search the book in library")
-        print("5. Borrow the book")
-        print("6. Return the book")
-        print("7. Exit")
-        choice = input("Choose an action (1-7): ")
-        if choice == "1":
-            add_book()
-        elif choice == "2":
-            view_books()
-        elif choice == "3":
-            delete_book()
-        elif choice == "4":
-            search_book()
-        elif choice == "5":
-            borrow_book()
-        elif choice == "6":
-            return_book()
-        elif choice == "7":
-            print("Exiting the program. Goodbye!")
-            break
-        else:
-            print("Invalid choice. Please try again.")
+        print("\n Menu ---")
+        print("1. Add book")
+        print("2. View books")
+        print("3. Delete book")
+        print("4. Search by title/author")
+        print("5. Search by logic result")
+        print("6. Bubble sort")
+        print("7. Merge sort")
+        print("8. Load from CSV")
+        print("9. Save to CSV")
+        print("0. Exit")
+
+        choice = input("Choose an option: ")
+
+
+
+
+
+
 
 # Run the code
 if __name__ == "__main__":

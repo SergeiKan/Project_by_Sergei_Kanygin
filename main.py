@@ -176,6 +176,17 @@ def main_menu():
             is_fiction = input("Is this scientific? (True/False): ").lower() == "true"
             book = Book(title, author, year, expr, is_scientific, is_fiction)
             library.add_book(book)
+            elif choice == "2":
+            library.view_books()
+        elif choice == "3":
+            library.view_books()
+            index = int(input("Введите номер книги для удаления / Enter book number to delete: ")) - 1
+            library.delete_book(index)
+        elif choice == "4":
+            keyword = input("Введите ключевое слово / Enter keyword: ")
+            results = library.search_books(keyword)
+            for book in results:
+                print(f"- {book.title}, логика: {book.logic_expression}, результат: {book.evaluate_expression()}")
 
 
 

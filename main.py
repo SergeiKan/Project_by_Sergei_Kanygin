@@ -180,13 +180,31 @@ def main_menu():
             library.view_books()
         elif choice == "3":
             library.view_books()
-            index = int(input("Введите номер книги для удаления / Enter book number to delete: ")) - 1
+            index = int(input("Enter book number to delete: ")) - 1
             library.delete_book(index)
         elif choice == "4":
-            keyword = input("Введите ключевое слово / Enter keyword: ")
+            keyword = input("Enter keyword: ")
             results = library.search_books(keyword)
             for book in results:
+                print(f"- {book.title}, logic: {book.logic_expression}, result: {book.evaluate_expression()}")
+        elif choice == "5":
+            logic_value = input("True или False? ").lower() == "true"
+            results = library.search_books_by_logic(logic_value)
+            for book in results:
                 print(f"- {book.title}, логика: {book.logic_expression}, результат: {book.evaluate_expression()}")
+        elif choice == "6":
+            library.bubble_sort_books()
+            library.view_books()
+        elif choice == "7":
+            library.merge_sort_books()
+            library.view_books()
+        elif choice == "8":
+            filename = input("Filename to load from: ")
+            library.load_from_csv(filename)
+        elif choice == "9":
+            filename = input("Filename to save to: ")
+            library.save_to_csv(filename)
+
 
 
 

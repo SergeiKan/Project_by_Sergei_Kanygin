@@ -166,6 +166,18 @@ def main_menu():
         print("0. Exit")
 
         choice = input("Choose an option: ")
+        
+        if choice == "1":
+            title = input("Title: ")
+            author = input("Author: ")
+            year = int(input("Year: "))
+            expr = input("Logic (example, scientific and not fiction): ")
+            is_scientific = input("Is this fiction? (True/False): ").lower() == "true"
+            is_fiction = input("Is this scientific? (True/False): ").lower() == "true"
+            book = Book(title, author, year, expr, is_scientific, is_fiction)
+            library.add_book(book)
+
+
 
 
 

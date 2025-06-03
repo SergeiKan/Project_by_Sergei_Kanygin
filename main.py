@@ -88,7 +88,7 @@ class Library:   # Create list for book`s information in library
                 if (a.year > b.year) or (a.year == b.year and not a.evaluate_expression() and b.evaluate_expression()):
                     self.books[j], self.books[j + 1] = b, a
         end = time.time()
-        print(f"Время сортировки пузырьком: {end - start:.6f} сек / Bubble sort time: {end - start:.6f} seconds")
+        print(f"Bubble sort time: {end - start:.6f} seconds")
 
     def merge_sort_books(self):   # Merge sort
         start = time.time()

@@ -176,7 +176,7 @@ def main_menu():
             is_fiction = input("Is this scientific? (True/False): ").lower() == "true"
             book = Book(title, author, year, expr, is_scientific, is_fiction)
             library.add_book(book)
-            elif choice == "2":
+        elif choice == "2":
             library.view_books()
         elif choice == "3":
             library.view_books()

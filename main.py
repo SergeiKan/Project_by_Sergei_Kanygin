@@ -204,15 +204,11 @@ def main_menu():
         elif choice == "9":
             filename = input("Filename to save to: ")
             library.save_to_csv(filename)
-
-
-
-
-
-
-
-
-
+        elif choice == "0":
+            print("Exiting program...")
+            break
+        else:
+            print("Invalid choice.")
 
 # Run the code
 if __name__ == "__main__":
